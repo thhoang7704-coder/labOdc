@@ -1,0 +1,13 @@
+# Frontend
+FE/node_modules/
+node_modules/
+
+# Backend
+labOdc/target/
+
+# Environment
+.env
+
+# IDE
+.idea/
+*.iml

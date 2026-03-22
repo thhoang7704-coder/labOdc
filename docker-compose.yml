@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: ./FE
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./labOdc
+    ports:
+      - "8082:8082"
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/labodc
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - JWT_SIGNER_KEY=8jN+KqRW9uXzByM6pT5vC8nZ2mQ4rW7xS9uE1hK4L7M2N5B8V1A0zC3xS6vB9nL2mQ5rT8uW1xZ4yA7bE0dG3jJ6
+
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: labodc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
