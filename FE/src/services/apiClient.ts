@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const baseURL =
-  (import.meta as any).env?.VITE_API_BASE_URL ||
-  // In dev, rely on Vite proxy (/api, /auth) to avoid CORS/preflight issues.
-  ((import.meta as any).env?.DEV ? "" : "http://localhost:8082");
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+if (!baseURL) {
+  console.error("❌ Missing VITE_API_BASE_URL");
+}
 
 // Create axios instance with base configuration
 const apiClient = axios.create({
