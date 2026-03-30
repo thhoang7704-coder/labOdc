@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL || "";
-console.log(import.meta.env.VITE_API_BASE_URL);
+const baseUrl = "https://labodc-backend-java.onrender.com";
+
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
