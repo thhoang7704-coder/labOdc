@@ -163,8 +163,10 @@ export const authService = {
     if (!token || authenticated !== true) {
       throw new Error(response.data?.message || "Authentication failed");
     }
+localStorage.setItem("token", token);
 
     const user = userFromBackendToken(token);
+     localStorage.setItem("user", JSON.stringify(user));
     return { user, token };
   },
 
