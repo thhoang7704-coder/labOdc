@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
-
+console.log("BASE URL:", baseURL);
 if (!baseURL) {
   console.error("❌ Missing VITE_API_BASE_URL");
 }
