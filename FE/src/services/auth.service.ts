@@ -42,8 +42,17 @@ const decodeJwtPayload = (token: string): any => {
 };
 
 const normalizeRoleFromJwt = (roles: unknown): UserRole => {
-  const rawList = Array.isArray(roles) ? roles.map(String) : [];
-  const list = rawList.map((r) => r.replace(/^ROLE_/, "").toUpperCase());
+  let rawList: string[] = [];
+
+  if (Array.isArray(roles)) {
+    rawList = roles.map(String);
+  } else if (typeof roles === "string") {
+    rawList = [roles];
+  }
+
+  const list = rawList.map((r) =>
+    r.replace(/^ROLE_/, "").toUpperCase()
+  );
 
   if (list.includes("SYSTEM_ADMIN")) return "SYSTEM_ADMIN";
   if (list.includes("LAB_ADMIN")) return "LAB_ADMIN";
@@ -53,7 +62,6 @@ const normalizeRoleFromJwt = (roles: unknown): UserRole => {
   if (list.includes("TALENT")) return "TALENT";
   if (list.includes("USER")) return "USER";
 
-  // Default to TALENT to keep legacy behavior for unknown roles.
   return "TALENT";
 };
 
