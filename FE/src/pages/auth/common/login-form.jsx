@@ -48,7 +48,7 @@ const LoginForm = () => {
         user: response.user,
         token: response.token
       }));
-
+        localStorage.setItem("token", res.data.token);
       toast.success("Login Successful");
 
       // Redirect based on user role
